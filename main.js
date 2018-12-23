@@ -1,10 +1,9 @@
+#!/usr/bin/env node
 const isOnline = require('is-online');
 const puppeteer = require('puppeteer');
 const exec = require('child_process').exec;
 const randomMac = require('random-mac');
 const interval = require('interval-promise');
-
-let busy = false;
 
 function delay(t, val) {
    return new Promise(function(resolve) {
@@ -34,21 +33,18 @@ async function reAuthenticate() {
 	console.log('Opening browser...');
 
 	const browser = await puppeteer.launch({headless: true});
-
 	const page = await browser.newPage();
 	
-	let wifiReady = false;
 	await interval(async (n, stop) => {
 		try {
 			await page.goto('http://captive.apple.com');
 			
 			console.log('WiFi ready!');
-			wifiReady = true;
 			stop();
 		} catch (e) {
 			console.log('WiFi down. Retrying...');
 		}
-	}, 200 /*, {iterations: 40} */);
+	}, 200);
 
 	// console.log('Opening login...');
 	// await Promise.all([
@@ -69,11 +65,7 @@ async function reAuthenticate() {
 	await browser.close();
 }
 
-async function checkOnlineStatus() {
-	if (busy) return;
-
-	busy = true;
-
+async function checkOnlineStatus(n, stop) {
 	console.log('Checking online status...');
 	const online = await isOnline();
 
@@ -87,8 +79,7 @@ async function checkOnlineStatus() {
 	}
 
 	console.log('Finished. Waiting...');
-	busy = false;
 }
 
-setInterval(checkOnlineStatus, 1000 * 30);
+interval(checkOnlineStatus, 1000 * 30);
 checkOnlineStatus();
