@@ -1,10 +1,9 @@
 {
-  "name": "delion-wifi",
+  "name": "mcb-bypass",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A tool to bypass the network restrictions of Melbourne City Backpackers.",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "sudo node main"
   },
   "bin": {
@@ -17,6 +16,5 @@
     "is-online": "^8.0.0",
     "puppeteer": "^1.11.0",
     "random-mac": "0.0.4",
-    "sudo-prompt": "^8.2.5"
   }
 }
