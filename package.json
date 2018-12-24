@@ -1,6 +1,6 @@
 {
   "name": "mcb-bypass",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A tool to bypass the network restrictions of Melbourne City Backpackers.",
   "main": "main.js",
   "scripts": {
@@ -14,7 +14,9 @@
   "dependencies": {
     "interval-promise": "^1.3.0",
     "is-online": "^8.0.0",
+    "node-notifier": "^5.3.0",
     "puppeteer": "^1.11.0",
-    "random-mac": "0.0.4",
-  }
+    "random-mac": "0.0.4"
+  },
+  "repository": "https://github.com/capevace/mcb-bypass"
 }
